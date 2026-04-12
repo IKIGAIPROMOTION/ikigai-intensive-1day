@@ -239,11 +239,122 @@
     if (e.key === 'Escape') closeModal();
   });
 
-  // Form submit
+  // Form submit — webhook
+  // TODO: заменить на реальный n8n webhook URL
+  // TODO: активировать workflow в n8n UI (тогл Active)
+  var WEBHOOK_URL = 'https://ubuntu.tailfac63b.ts.net/webhook/intensive';
+
   modalForm.addEventListener('submit', function (e) {
     e.preventDefault();
+
+    var name = document.getElementById('modalName').value.trim();
+    var phone = document.getElementById('modalPhone').value.trim();
+
+    // Send to webhook (fire-and-forget with fallback)
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, phone: phone, source: 'intensive-landing' })
+    }).catch(function () {
+      // Webhook unavailable — still show success to user
+    });
+
+    // Show success immediately
     modalForm.style.display = 'none';
     modalSuccess.style.display = 'block';
     setTimeout(closeModal, 2500);
   });
+  /* --- Testimonials: drag-to-scroll + arrows + click-to-play --- */
+  var track = document.getElementById('testimonialsTrack');
+  if (track) {
+    var scrollAmount = 300;
+    var isDragging = false;
+    var dragStartX, dragScrollLeft, hasDragged;
+
+    // Arrow buttons
+    var leftBtn = document.getElementById('testimonialsLeft');
+    var rightBtn = document.getElementById('testimonialsRight');
+
+    if (leftBtn) {
+      leftBtn.addEventListener('click', function () {
+        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+    }
+    if (rightBtn) {
+      rightBtn.addEventListener('click', function () {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+
+    // Drag-to-scroll (desktop)
+    track.addEventListener('mousedown', function (e) {
+      isDragging = true;
+      hasDragged = false;
+      track.style.cursor = 'grabbing';
+      dragStartX = e.pageX;
+      dragScrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', function () { isDragging = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mouseup', function () { isDragging = false; track.style.cursor = 'grab'; });
+    track.addEventListener('mousemove', function (e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      var dx = e.pageX - dragStartX;
+      if (Math.abs(dx) > 5) hasDragged = true;
+      track.scrollLeft = dragScrollLeft - dx;
+    });
+
+    // Click thumbnail → load iframe (skip if dragged)
+    track.addEventListener('click', function (e) {
+      if (hasDragged) return;
+      var card = e.target.closest('.testimonials__video');
+      if (!card || card.querySelector('iframe')) return;
+      var videoId = card.dataset.videoId;
+      if (!videoId) return;
+      card.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+    });
+  }
+
+  /* --- Countdown Timer --- */
+  var countdownEl = document.getElementById('countdown');
+  if (countdownEl) {
+    // 25 апреля 2026, 10:00 Алматы (UTC+5)
+    var targetDate = new Date('2026-04-25T10:00:00+05:00').getTime();
+
+    var daysEl = document.getElementById('countDays');
+    var hoursEl = document.getElementById('countHours');
+    var minsEl = document.getElementById('countMins');
+    var secsEl = document.getElementById('countSecs');
+    var labelEl = countdownEl.querySelector('.countdown__label');
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function updateCountdown() {
+      var now = Date.now();
+      var diff = targetDate - now;
+
+      if (diff <= 0) {
+        labelEl.textContent = 'Интенсив начался!';
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minsEl.textContent = '00';
+        secsEl.textContent = '00';
+        return;
+      }
+
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+
+      daysEl.textContent = pad(d);
+      hoursEl.textContent = pad(h);
+      minsEl.textContent = pad(m);
+      secsEl.textContent = pad(s);
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
 })();
