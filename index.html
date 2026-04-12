@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Интенсив за 1 день — IKIGAI PROMOTION</title>
+  <meta name="description" content="Собери свою AI-систему и начни работать быстрее уже завтра. 8 часов практики: Cursor, Claude Code, MCP, автоматизации.">
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <img src="assets/logo-dark.png" alt="IKIGAI PROMOTION" class="header__logo">
+      <nav class="header__nav">
+        <a href="#program" class="header__nav-link">Программа</a>
+        <a href="#speaker" class="header__nav-link">Спикер</a>
+        <a href="#results" class="header__nav-link">Результат</a>
+        <a href="#faq" class="header__nav-link">FAQ</a>
+        <a href="#venue" class="header__nav-link">Локация</a>
+      </nav>
+      <button type="button" class="btn btn--primary header__cta open-modal">
+        <span>Забронировать&nbsp;</span>место
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== 1. HERO ========== -->
+  <section class="hero section" id="hero">
+    <div class="container">
+      <div class="hero__grid">
+        <div class="hero__content fade-up">
+          <div class="hero__badge">
+            <span></span> 24 апреля &middot; Алматы &middot; 10:00&ndash;19:00
+          </div>
+          <h1>Собери свою <span class="highlight">AI&#8209;систему</span> и начни работать быстрее уже завтра</h1>
+          <p class="hero__sub">8 часов практики &mdash; не теория, а готовые инструменты, которые ты заберёшь с собой</p>
+          <div class="hero__cta">
+            <button type="button" class="btn btn--primary btn--lg open-modal">Забронировать место</button>
+            <a href="#program" class="btn btn--outline">Программа</a>
+          </div>
+          <div class="hero__meta">
+            <div class="hero__meta-item hero__meta-item--accent">
+              <span class="hero__meta-label">Формат</span>
+              <span class="hero__meta-value">Только офлайн</span>
+            </div>
+            <div class="hero__meta-item">
+              <span class="hero__meta-label">Длительность</span>
+              <span class="hero__meta-value">8 часов</span>
+            </div>
+            <div class="hero__meta-item">
+              <span class="hero__meta-label">Уровень</span>
+              <span class="hero__meta-value">С нуля до системы</span>
+            </div>
+            <div class="hero__meta-item">
+              <span class="hero__meta-label">Результат</span>
+              <span class="hero__meta-value">Рабочая AI-система</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual fade-up">
+          <div class="neural-net" id="neuralNet">
+            <canvas id="neuralCanvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 1.5 CREDENTIALS ========== -->
+  <section class="section credentials" id="credentials">
+    <div class="container">
+      <div class="credentials__inner fade-up">
+        <a href="https://astanahub.com/ru/blog/ikigai-promotion-nominant-premii-people-projects-awards-2025" class="credentials__item credentials__link" target="_blank" rel="noopener">
+          <div class="credentials__icon">
+            <img src="award_people_projects.png" alt="People & Projects Award 2025">
+          </div>
+          <div class="credentials__text">
+            <strong>People &amp; Projects Award 2025</strong>
+            <span>Премия ЦА в образовании и инновациях</span>
+          </div>
+        </a>
+        <div class="credentials__divider"></div>
+        <a href="https://astanahub.com/ru/blog/ikigai-promotion-stala-pobeditelem-digital-qazaqstan-awards-2026-v-nominatsii-regional-ai-transformat" class="credentials__item credentials__link" target="_blank" rel="noopener">
+          <div class="credentials__icon">
+            <img src="award_digital_qazaqstan.png" alt="Digital Qazaqstan Awards 2026">
+          </div>
+          <div class="credentials__text">
+            <strong>Digital Qazaqstan Awards 2026</strong>
+            <span>Номинация &laquo;Regional AI Transformation&raquo;</span>
+          </div>
+        </a>
+        <div class="credentials__divider"></div>
+        <a href="https://astanahub.com/account/v2/company/13708/profile/activity/" class="credentials__item credentials__link" target="_blank" rel="noopener">
+          <div class="credentials__badge-ah">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <span>Участник Astana Hub</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 2. PROBLEM ========== -->
+  <section class="section section--alt" id="problem">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Реальность</div>
+        <h2>Мир уже разделился на&nbsp;два типа людей</h2>
+      </div>
+      <div class="problem__grid fade-up">
+        <div class="problem__card problem__card--positive glow-card">
+          <div class="problem__card-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#84CC16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Те, кто уже с AI</h3>
+          <ul>
+            <li>Усилили себя инструментами и делают x3&ndash;x5</li>
+            <li>Автоматизировали рутину</li>
+            <li>AI работает на них как система, а не игрушка</li>
+          </ul>
+        </div>
+        <div class="problem__card problem__card--negative glow-card">
+          <div class="problem__card-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
+          </div>
+          <h3>Те, кто ещё без AI</h3>
+          <ul>
+            <li>Работают медленнее рынка</li>
+            <li>Проигрывают тем, кто автоматизировал задачи</li>
+            <li>Теряют деньги, не понимая где</li>
+          </ul>
+        </div>
+      </div>
+      <p class="problem__bottom fade-up">
+        Этот интенсив &mdash; <span class="highlight">быстрый вход</span> в&nbsp;первую группу
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== 3. PROGRAM ========== -->
+  <section class="section" id="program">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Программа</div>
+        <h2>Что ты сделаешь за&nbsp;8 часов</h2>
+        <p class="section-subtitle">Не послушаешь лекцию, а сделаешь руками &mdash; и заберёшь с собой</p>
+      </div>
+      <div class="program__grid">
+        <div class="program__card glow-card fade-up">
+          <div class="program__card-num">01</div>
+          <h3>Установишь</h3>
+          <ul>
+            <li>Cursor &mdash; AI-редактор кода</li>
+            <li>Claude Code &mdash; агентская среда</li>
+            <li>Настроишь рабочее окружение</li>
+          </ul>
+        </div>
+        <div class="program__card glow-card fade-up">
+          <div class="program__card-num">02</div>
+          <h3>Освоишь</h3>
+          <ul>
+            <li>Vibe-coding &mdash; как работать с AI как разработчик</li>
+            <li>Логику AI-систем, а не просто &laquo;писать промпты&raquo;</li>
+            <li>Принципы построения автоматизаций</li>
+          </ul>
+        </div>
+        <div class="program__card glow-card fade-up">
+          <div class="program__card-num">03</div>
+          <h3>Подключишь</h3>
+          <ul>
+            <li>Telegram, Gmail, Notion, Miro</li>
+            <li>Базы данных и внешние API</li>
+            <li>MCP &mdash; Model Context Protocol</li>
+          </ul>
+        </div>
+        <div class="program__card glow-card fade-up">
+          <div class="program__card-num">04</div>
+          <h3>Получишь</h3>
+          <ul>
+            <li>Готовые скиллы и агенты</li>
+            <li>Библиотеки плагинов и MCP-интеграции</li>
+            <li>Чёткую архитектуру для движения вперёд</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 4. RESULTS ========== -->
+  <section class="section section--alt" id="results">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Результат</div>
+        <h2>Что у тебя будет после интенсива</h2>
+      </div>
+      <div class="results__grid">
+        <div class="results__card fade-up">
+          <div class="results__icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Рабочий инструмент</h3>
+          <p>Настроенная AI-система, которая реально ускоряет твою работу</p>
+        </div>
+        <div class="results__card fade-up">
+          <div class="results__icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3 4 4.5 4.5 0 0 1-3-4"/><path d="M12 18v-6"/><path d="M9 10h6"/></svg>
+          </div>
+          <h3>Понимание</h3>
+          <p>Как строить AI под себя &mdash; не копировать чужое, а создавать своё</p>
+        </div>
+        <div class="results__card fade-up">
+          <div class="results__icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Первые автоматизации</h3>
+          <p>Telegram-боты, email-интеграции, связки с Notion и базами данных</p>
+        </div>
+        <div class="results__card fade-up">
+          <div class="results__icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+          </div>
+          <h3>Ощущение</h3>
+          <p>&laquo;Я уже внутри, а не снаружи&raquo; &mdash; ты в потоке, а не наблюдаешь</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5. AUDIENCE ========== -->
+  <section class="section" id="audience">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Для кого</div>
+        <h2>Кому критически нужен этот интенсив</h2>
+      </div>
+      <div class="audience__grid">
+        <div class="audience__card glow-card fade-up">
+          <div class="audience__emoji">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3>Предприниматели</h3>
+          <p>Хотите масштабировать бизнес без раздувания команды</p>
+        </div>
+        <div class="audience__card glow-card fade-up">
+          <div class="audience__emoji">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h3>Эксперты и фрилансеры</h3>
+          <p>Готовы делать больше проектов за то же время</p>
+        </div>
+        <div class="audience__card glow-card fade-up">
+          <div class="audience__emoji">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          </div>
+          <h3>Маркетологи</h3>
+          <p>Хотите автоматизировать рутину и сфокусироваться на стратегии</p>
+        </div>
+        <div class="audience__card glow-card fade-up">
+          <div class="audience__emoji">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>&laquo;Рынок ускорился, а я &mdash; нет&raquo;</h3>
+          <p>Чувствуете, что отстаёте &mdash; и хотите это исправить за один день</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 5.5 POWER — Сила Claude Code ========== -->
+  <section class="section section--dark" id="power">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Почему это работает</div>
+        <h2>Не просто ChatGPT &mdash; а целый <span class="highlight">мозг системы</span></h2>
+        <p class="section-subtitle" style="color: var(--text-on-dark); opacity: 0.8;">Вы получаете не очередной инструмент для генерации картинок, а архитектуру AI-офиса, который работает на вас 24/7</p>
+      </div>
+      <div class="power__grid">
+        <div class="power__card fade-up">
+          <div class="power__card-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#84CC16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="m7 8 3 3-3 3"/><line x1="13" y1="14" x2="17" y2="14"/></svg>
+          </div>
+          <h3>AI-офис за 1 день</h3>
+          <p>10 агентов, построенных с Claude Code: контент, аналитика, CRM, мониторинг конкурентов &mdash; работают без вашего участия</p>
+          <a href="https://glaze-limburger-b5f.notion.site/AI-IKIGAI-1-10-Claude-Code-33679fffe53a8156b803cc7826e1a08a" class="power__link" target="_blank" rel="noopener">Читать кейс &rarr;</a>
+        </div>
+        <div class="power__card fade-up">
+          <div class="power__card-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#84CC16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3>Дневник вайб-кодера</h3>
+          <p>Реальный путь не-программиста: от &laquo;что такое терминал&raquo; до работающей системы автоматизаций за несколько недель</p>
+          <a href="https://glaze-limburger-b5f.notion.site/33279fffe53a81d9a236e1e196877e79" class="power__link" target="_blank" rel="noopener">Читать дневник &rarr;</a>
+        </div>
+        <div class="power__card fade-up">
+          <div class="power__card-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#84CC16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.8 15-3.5 2"/><path d="m20.7 17-3.5-2"/><path d="M6.5 8.5 3 6.5"/><path d="M20.5 8.5 24 6.5"/><circle cx="12" cy="12" r="4"/><path d="M12 16v6"/></svg>
+          </div>
+          <h3>Skills и плагины</h3>
+          <p>Мы дадим готовые библиотеки скилов (Superpowers, SkillHub) и покажем как подключать MCP-интеграции: Figma, Notion, Apify</p>
+          <a href="https://www.skillhub.club/" class="power__link" target="_blank" rel="noopener">Библиотека скилов &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6. SPEAKER (Конев Сергей) ========== -->
+  <section class="section" id="speaker">
+    <div class="container">
+      <div class="speaker__layout fade-up">
+        <div class="speaker__photo">
+          <img src="sergey_konev_photo.jpg" alt="Конев Сергей — AI-визионер и AI-эксперт">
+        </div>
+        <div class="speaker__info">
+          <div class="section-tag">Спикер</div>
+          <h2>Конев Сергей</h2>
+          <p class="speaker__title">AI-визионер и AI-эксперт</p>
+          <div class="speaker__stats">
+            <div class="speaker__stat"><strong>29+</strong> лет в бизнесе</div>
+            <div class="speaker__stat"><strong>17+</strong> лет в маркетинге</div>
+            <div class="speaker__stat"><strong>4+</strong> года &mdash; в системном внедрении AI в бизнес-процессы</div>
+          </div>
+          <div class="speaker__bio">
+            <p>Эксперт по запуску AI-команд, автоматизации продаж, маркетинга, HR и клиентского сервиса.</p>
+            <p>Создатель и спикер курса <a href="https://ikigaipromotion.kz/aiteamforbusiness" target="_blank" rel="noopener">&laquo;AI-сотрудники для бизнеса&raquo;</a> &mdash; оффлайн/онлайн-программ по созданию нейросотрудников под ключ.</p>
+            <p>Был партнёром Kaspi Bank, сетей Basilic, Gippo, BlackStarBurgerKZ и др.</p>
+            <p class="speaker__role-highlight">Со-основатель <a href="https://ikigaipromotion.kz/" target="_blank" rel="noopener">IKIGAI PROMOTION</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 6.5 TEAM (Сергей + Алия) ========== -->
+  <section class="section section--alt" id="team">
+    <div class="container">
+      <div class="team__layout fade-up">
+        <div class="team__photo-block">
+          <div class="team__photo">
+            <img src="team_photo.png" alt="Сергей Конев и Алия Рызыхан — со-основатели IKIGAI PROMOTION">
+          </div>
+        </div>
+        <div class="team__info">
+          <div class="section-tag">Команда</div>
+          <h2>Мы проводим вместе</h2>
+          <div class="team__members">
+            <div class="team__member">
+              <h3>Конев Сергей</h3>
+              <p class="team__member-role">AI-стратег и AI-эксперт</p>
+              <p>Со-основатель <a href="https://ikigaipromotion.kz/" target="_blank" rel="noopener">IKIGAI PROMOTION</a>. Не рассказывает теорию &mdash; показывает свою рабочую систему и помогает собрать такую же.</p>
+            </div>
+            <div class="team__member">
+              <h3>Рызыхан Алия</h3>
+              <p class="team__member-role">Продюсер</p>
+              <p>Со-основатель <a href="https://ikigaipromotion.kz/" target="_blank" rel="noopener">IKIGAI PROMOTION</a>. Отвечает за то, чтобы знания превращались в результат, а участники получали поддержку на каждом этапе.</p>
+            </div>
+          </div>
+          <p class="team__together">Вместе мы проводим интенсивы, буткемпы и корпоративные программы по внедрению AI.</p>
+          <div class="team__awards">
+            <a href="https://astanahub.com/ru/blog/ikigai-promotion-nominant-premii-people-projects-awards-2025" class="award award--link" target="_blank" rel="noopener">
+              <div class="award__icon">
+                <img src="award_people_projects.png" alt="People & Projects Award 2025">
+              </div>
+              <div class="award__text">
+                <h4>People &amp; Projects Award 2025</h4>
+                <p>Премия Центральной Азии в области образования и инноваций</p>
+              </div>
+            </a>
+            <a href="https://astanahub.com/ru/blog/ikigai-promotion-stala-pobeditelem-digital-qazaqstan-awards-2026-v-nominatsii-regional-ai-transformat" class="award award--link" target="_blank" rel="noopener">
+              <div class="award__icon">
+                <img src="award_digital_qazaqstan.png" alt="Digital Qazaqstan Awards 2026">
+              </div>
+              <div class="award__text">
+                <h4>Digital Qazaqstan Awards 2026</h4>
+                <p>Национальная премия &mdash; номинация &laquo;Regional AI Transformation&raquo;</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7. EXPECTATIONS ========== -->
+  <section class="section" id="expectations">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Важно</div>
+        <h2>Что важно понимать до покупки</h2>
+      </div>
+      <div class="expect__grid">
+        <div class="expect__card glow-card fade-up">
+          <div class="expect__card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <h3>Это НЕ сделает тебя экспертом за 8 часов</h3>
+          <p>Мы не обещаем волшебных таблеток. Это быстрый вход и первый рабочий результат, а не курс на полгода.</p>
+        </div>
+        <div class="expect__card glow-card fade-up">
+          <div class="expect__card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+          </div>
+          <h3>Это &mdash; квантовый скачок</h3>
+          <p>За один день ты пройдёшь путь, который многие проходят за недели самостоятельных попыток и проб.</p>
+        </div>
+        <div class="expect__card glow-card fade-up">
+          <div class="expect__card-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3 4 4.5 4.5 0 0 1-3-4"/><path d="M12 18v-6"/><path d="M9 10h6"/></svg>
+          </div>
+          <h3>Может быть перегруз</h3>
+          <p>Для многих это будет интенсивно по уровню. И это нормально &mdash; значит, ты растёшь.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 7.5 FAQ ========== -->
+  <section class="section section--alt" id="faq">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Вопросы</div>
+        <h2>Частые вопросы</h2>
+      </div>
+      <div class="faq__list fade-up">
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>Нужен ли опыт программирования?</span>
+            <svg class="faq__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Нет. Интенсив разработан для не-программистов &mdash; предпринимателей, маркетологов, экспертов. Мы начинаем с установки инструментов и идём пошагово. Опыт в коде не нужен.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>Что нужно взять с собой?</span>
+            <svg class="faq__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Ноутбук (MacOS или Windows) и зарядку. Смартфон не подойдёт &mdash; нужна полноценная операционная система для работы с AI-инструментами.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>Нужно ли заранее устанавливать какие-то программы?</span>
+            <svg class="faq__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Нет, всё установим вместе на месте. Это часть программы &mdash; первый блок посвящён настройке рабочего окружения: Cursor, Claude Code и всех нужных инструментов.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>Что если я ничего не пойму во время интенсива?</span>
+            <svg class="faq__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Это нормально. Мы работаем в малых группах, чтобы каждый получил внимание. Ощущение перегруза &mdash; признак роста. После интенсива все материалы и ссылки остаются у вас.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>Будет ли запись интенсива?</span>
+            <svg class="faq__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Нет, это только офлайн-формат. Ценность именно в практике руками под руководством спикера. Все материалы, ссылки на библиотеки скилов и инструкции &mdash; останутся у вас навсегда.</p>
+          </div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__question" type="button">
+            <span>Сколько стоят сервисы, которые понадобятся?</span>
+            <svg class="faq__chevron" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq__answer">
+            <p>Дополнительно $120&ndash;200 на подписки (Claude Pro, Cursor и др.). Вы подключаете только то, что реально используете &mdash; мы подскажем, что нужно именно вам.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8. PRICING ========== -->
+  <section class="section section--alt" id="pricing">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Стоимость</div>
+        <h2>Инвестиция в свою скорость</h2>
+      </div>
+      <div class="pricing__card fade-up">
+        <div class="pricing__amount">88 000 <span class="pricing__currency">&#8376;</span></div>
+        <p class="pricing__note">Полный день практики с экспертом + все материалы и ссылки на библиотеки скилов</p>
+        <div class="pricing__extras">
+          <strong>Дополнительно:</strong> $120&ndash;200 на сервисы<br>
+          (подключаешь только то, что реально используешь).<br>
+          Занятия проходят <strong>только с ноутбуком</strong> (смартфон не подойдёт).<br>
+          Дополнительно можем помочь развернуть систему на сервере.
+        </div>
+        <div class="pricing__cta">
+          <button type="button" class="btn btn--primary btn--lg open-modal" id="cta-main">Записаться на интенсив</button>
+        </div>
+        <p class="pricing__guarantee">Количество мест ограничено &mdash; работаем в малых группах</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 8.5 VENUE ========== -->
+  <section class="section" id="venue">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Локация</div>
+        <h2>Где проходит</h2>
+      </div>
+      <div class="venue__card fade-up">
+        <div class="venue__info">
+          <h3>Qaynar Bulaq Almaty</h3>
+          <div class="venue__details">
+            <div class="venue__detail">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>24 апреля 2026, четверг</span>
+            </div>
+            <div class="venue__detail">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>10:00 &ndash; 19:00 (перерыв на обед 15:00&ndash;16:00)</span>
+            </div>
+            <div class="venue__detail">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>г. Алматы</span>
+            </div>
+          </div>
+          <a href="https://2gis.kz/almaty/geo/70000001055058633" class="btn btn--outline venue__map-btn" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Открыть на карте 2GIS
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 9. URGENCY ========== -->
+  <section class="section section--dark urgency" id="urgency">
+    <div class="container fade-up">
+      <h2>Если ты откладываешь</h2>
+      <p class="urgency__text">
+        Скорее всего, ты снова отложишь. Снова &laquo;посмотришь потом&raquo;.
+        Снова останешься на том же месте, пока другие уже строят свои AI-системы.
+      </p>
+      <button type="button" class="btn btn--white btn--lg open-modal">Записаться сейчас</button>
+    </div>
+  </section>
+
+  <!-- ========== 10. UPSELL ========== -->
+  <section class="section section--dark" id="upsell">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Следующий уровень</div>
+        <h2>Хочешь глубже? <span class="highlight">23 дня</span> полного погружения</h2>
+        <p class="section-subtitle" style="color: var(--text-on-dark); opacity: 0.8;">Не курс &mdash; а сборка собственной AI-операционной системы под задачи бизнеса</p>
+      </div>
+      <div class="upsell__grid fade-up">
+        <div class="upsell__step">
+          <div class="upsell__step-num">01</div>
+          <h4>AI-first база</h4>
+          <p>Как думают нейросети, продвинутый промптинг, ускорение аналитики &times;5</p>
+        </div>
+        <div class="upsell__step">
+          <div class="upsell__step-num">02</div>
+          <h4>AI-агенты</h4>
+          <p>n8n, архитектура агентов, первый AI-ассистент, база знаний Pinecone</p>
+        </div>
+        <div class="upsell__step">
+          <div class="upsell__step-num">03</div>
+          <h4>Вайб-кодинг</h4>
+          <p>Cursor + Claude Code, MCP, API, парсеры, деплой реальных продуктов</p>
+        </div>
+        <div class="upsell__step">
+          <div class="upsell__step-num">04</div>
+          <h4>AI-маркетинг</h4>
+          <p>Анализ рынка, фабрика креативов, автоматизация контента, cold outreach</p>
+        </div>
+        <div class="upsell__step">
+          <div class="upsell__step-num">05</div>
+          <h4>Финал</h4>
+          <p>Сборка собственных проектов, демо-день, разборы, масштабирование</p>
+        </div>
+      </div>
+      <div class="upsell__bottom fade-up">
+        <div class="upsell__meta">
+          <div class="upsell__meta-item"><strong>23</strong> дня</div>
+          <div class="upsell__meta-item"><strong>4&ndash;5</strong> часов/день</div>
+          <div class="upsell__meta-item"><strong>880 000</strong> &#8376;</div>
+        </div>
+        <p class="upsell__result">Результат: ты строишь AI-системы, автоматизируешь процессы и создаёшь продукты без разработчиков</p>
+        <a href="https://docs.google.com/document/d/13WXqNjwHPigDGHyyve1oSZxhpYAw7i2lqGp8EzKLoZg/edit?usp=sharing" class="btn btn--white btn--lg" target="_blank" rel="noopener">Узнать подробнее</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 10.5 COMMUNITY ========== -->
+  <section class="section section--alt" id="community">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="section-tag">Сообщество</div>
+        <h2>Вступай в открытое <span class="highlight">AI-сообщество</span></h2>
+        <p class="section-subtitle">Бесплатно, без покупки курса. Будь там, где двигаются вперёд</p>
+      </div>
+      <div class="community__grid fade-up">
+        <a href="https://chat.whatsapp.com/EQqaPOPurZD56Aot1HiXo4" class="community__card community__card--wa" target="_blank" rel="noopener">
+          <div class="community__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="community__info">
+            <h3>AI HUB 2026</h3>
+            <p class="community__meta-line">WhatsApp-группа &middot; <strong>450+ участников</strong></p>
+            <p>Открытая площадка для всех, кто внедряет AI. Практика, инструменты, обучение, эксперты</p>
+          </div>
+          <span class="community__join">Вступить &rarr;</span>
+        </a>
+        <a href="https://t.me/marketingmentorai" class="community__card community__card--tg" target="_blank" rel="noopener">
+          <div class="community__icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="#2AABEE"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm5.654 7.238c.126-.002.262.032.344.088.07.047.117.117.135.21.015.072.034.237.019.368-.18 1.9-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.064-1.225-.46-1.9-.902-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </div>
+          <div class="community__info">
+            <h3>Marketing Mentor AI</h3>
+            <p class="community__meta-line">Telegram-канал &middot; <strong>публичный</strong></p>
+            <p>AI-инсайты, разборы кейсов, лучшие промты, челленджи и поддержка менторов</p>
+          </div>
+          <span class="community__join">Подписаться &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 11. FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="assets/logo-light.png" alt="IKIGAI PROMOTION" class="footer__logo">
+        <span class="footer__text">Со-основатели: Сергей Конев и Алия Рызыхан</span>
+      </div>
+      <div class="footer__links">
+        <a href="https://t.me/ktotothu" target="_blank" rel="noopener">Telegram</a>
+        <a href="https://www.instagram.com/marketingmentorai/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@marketingmentorai" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://wa.me/77751221177" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://ikigaipromotion.kz" target="_blank" rel="noopener">Сайт</a>
+      </div>
+      <span class="footer__text">&copy; 2026 <a href="https://ikigaipromotion.kz/" target="_blank" rel="noopener">IKIGAI PROMOTION</a></span>
+    </div>
+  </footer>
+
+  <!-- ========== MODAL ========== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal__close" id="modalClose" aria-label="Закрыть">&times;</button>
+      <h3 class="modal__title">Записаться на интенсив</h3>
+      <form class="modal__form" id="modalForm">
+        <input type="text" class="modal__input" id="modalName" placeholder="Имя" required>
+        <input type="tel" class="modal__input" id="modalPhone" placeholder="Номер WhatsApp" required>
+        <button type="submit" class="btn btn--primary btn--lg modal__submit">Отправить</button>
+      </form>
+      <div class="modal__success" id="modalSuccess" style="display:none;">
+        <p>Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
