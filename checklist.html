@@ -189,7 +189,7 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
       <div class="title">Установка</div>
       <div class="time">10:00 – 12:00 (2 часа)</div>
     </div>
-    <div class="badge" id="badge-1">0/13</div>
+    <div class="badge" id="badge-1">0/14</div>
     <div class="arrow">&#9660;</div>
   </div>
   <div class="module-body">
@@ -292,6 +292,35 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
         <div class="cmd-block">
           <div class="cmd-label"><div class="platform">Полная диагностика</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
           <div class="cmd-code">claude doctor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Настройка разрешений — /config</b> <span class="step-time">5 мин</span></div>
+        <div class="say">Claude Code по умолчанию спрашивает подтверждение на каждое действие. Для обучения мы это упростим — выберем режим, где AI работает быстрее и не дёргает вас каждые 5 секунд.</div>
+        <div class="step-note">Внутри Claude Code набрать команду:</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Внутри Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">/config</div>
+        </div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #EDE9FE; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что делать в меню /config:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>1.</b> Убедитесь, что открыта вкладка <code>Config</code> (вверху)</span>
+          <span style="display: block; margin-bottom: 4px;"><b>2.</b> Стрелками <code>↑↓</code> найдите строку <code>Default permission mode</code></span>
+          <span style="display: block; margin-bottom: 4px;"><b>3.</b> Нажмите <code>Space</code> чтобы переключить режим</span>
+          <span style="display: block; margin-bottom: 4px;"><b>4.</b> Выберите <code>Auto-edit</code> (для обучения) или <code>Don't Ask</code> (быстрый режим)</span>
+          <span style="display: block;"><b>5.</b> Нажмите <code>Enter</code> чтобы сохранить</span>
+        </div>
+        <div class="tip">Для реальных проектов с важными данными лучше оставить подтверждения включёнными (<code>Normal</code>). Для обучения — отключаем, чтобы не тормозить процесс.</div>
+        <div class="step-note" style="margin-top: 8px; padding: 10px; background: #F8F7FF; border-radius: 8px;">
+          <b style="display: block; margin-bottom: 6px;">Режимы разрешений:</b>
+          <span style="display: block; margin-bottom: 3px;"><code>Normal</code> — спрашивает каждое действие (безопасный)</span>
+          <span style="display: block; margin-bottom: 3px;"><code>Auto-edit</code> — правки автоматом, команды с подтверждением (рекомендуем)</span>
+          <span style="display: block; margin-bottom: 3px;"><code>Don't Ask</code> — почти всё автоматом (быстрый)</span>
+          <span style="display: block;"><code>Trust</code> — полный автопилот (только для опытных)</span>
         </div>
       </div>
     </div>
