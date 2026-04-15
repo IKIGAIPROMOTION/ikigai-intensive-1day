@@ -691,8 +691,36 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
     <div class="step" data-step>
       <div class="step-check" onclick="toggleStep(this)"></div>
       <div class="step-content">
-        <div class="step-text"><b>Практика: настраиваем свою среду</b> <span class="step-time">20 мин</span></div>
-        <div class="step-note">Каждый участник пробует /plan или /brainstorm на своём проекте. Ходить по залу, помогать.</div>
+        <div class="step-text"><b>Plan Mode — составляем план вашего бизнес-проекта</b> <span class="step-time">25 мин</span></div>
+        <div class="say">У каждого из вас свой бизнес и свои задачи. Сейчас мы используем режим планирования — Claude Code не будет ничего делать, он сначала составит план. Как архитектор рисует чертёж перед стройкой. Это самый важный навык вайб-кодера: сначала план, потом код.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #EDE9FE; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что такое Plan Mode:</b>
+          <span style="display: block; margin-bottom: 4px;">Claude Code переходит в режим «только думать, не делать»</span>
+          <span style="display: block; margin-bottom: 4px;">Он читает ваши файлы, анализирует задачу и создаёт пошаговый план</span>
+          <span style="display: block; margin-bottom: 4px;">Вы проверяете план и одобряете — только тогда он начинает кодить</span>
+          <span style="display: block;">Это защищает от ошибок: AI не сделает лишнего, пока вы не скажете «го»</span>
+        </div>
+        <div class="step-note" style="margin-top: 10px;"><b>Шаг 1:</b> Включите Plan Mode — нажмите <code>Shift+Tab</code> или наберите:</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Включить режим планирования</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">/plan</div>
+        </div>
+        <div class="step-note" style="margin-top: 10px;"><b>Шаг 2:</b> Опишите свою реальную бизнес-задачу. Примеры промптов:</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Для тех, кто хочет лендинг</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Составь план создания лендинга для моего бизнеса. Используй информацию из inbox/about-me.txt. Нужно: hero-секция, описание услуг, отзывы, форма заявки, мобильная адаптация. Стиль — современный, минималистичный.</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Для тех, кто хочет автоматизацию</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Составь план автоматизации моего бизнеса. Прочитай inbox/about-me.txt. Предложи: какие процессы автоматизировать первыми, какие инструменты использовать, в каком порядке внедрять. Разбей на этапы по 1 неделе.</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Для тех, кто хочет контент-систему</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Составь план создания контент-системы для моего бизнеса. Цель: 3 поста в неделю в Instagram + Telegram. Нужно: контент-план на месяц, шаблоны промптов для генерации текстов, система хранения идей. Прочитай inbox/about-me.txt.</div>
+        </div>
+        <div class="step-note" style="margin-top: 10px;"><b>Шаг 3:</b> Прочитайте план. Если нравится — одобрите (Claude сам предложит). Если нет — скажите что поменять.</div>
+        <div class="tip">Ходить по залу, помогать формулировать запросы. Главное — план должен быть по реальной задаче участника, не абстрактной. После модуля 4 (MCP) у них будет шанс реализовать этот план.</div>
+        <div class="warning">Не давайте Claude Code начать делать без плана! Это самая частая ошибка новичков — сразу просят «сделай мне сайт» без подготовки. Plan Mode — привычка, которая экономит часы.</div>
       </div>
     </div>
 
