@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKIGAI — AI-Интенсив по вайб-кодингу: Чек-лист ведущего</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif; background: #FFFFFF; color: #1A1A2E; min-height: 100vh; padding-bottom: 56px; -webkit-font-smoothing: antialiased; }
+
+.container { max-width: 720px; margin: 0 auto; }
+
+.header { background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 20px 20px 16px; border-bottom: 1px solid #E5E7EB; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.header .container { display: flex; flex-direction: column; gap: 14px; }
+.header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.header h1 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: #1A1A2E; }
+.header h1 span { color: #7C3AED; }
+.header .meta { color: #6B7280; font-size: 13px; margin-top: 2px; }
+.header .meta b { color: #1A1A2E; font-weight: 600; }
+
+.progress-bar { height: 6px; background: #E5E7EB; border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #7C3AED, #84CC16); border-radius: 3px; transition: width 0.5s ease; width: 0%; }
+.progress-text { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: #9CA3AF; }
+.progress-text .done { color: #7C3AED; font-weight: 600; }
+
+.timer { background: #7C3AED; color: #fff; padding: 6px 16px; border-radius: 100px; font-weight: 600; font-size: 13px; cursor: pointer; user-select: none; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.02em; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 4px 24px rgba(124, 58, 237, 0.2); }
+.timer:hover { background: #6D28D9; transform: translateY(-1px); }
+.timer.running { background: #EF4444; box-shadow: 0 4px 24px rgba(239, 68, 68, 0.2); }
+.timer.running:hover { background: #DC2626; }
+
+.module { margin: 16px 20px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.module-header { padding: 14px 18px; cursor: pointer; display: flex; align-items: center; gap: 12px; user-select: none; transition: background 0.15s; }
+.module-header:hover { background: #F8F7FF; }
+.module-header .num { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.module-header .info { flex: 1; }
+.module-header .title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.module-header .time { font-size: 12px; color: #9CA3AF; margin-top: 1px; }
+.module-header .badge { padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; border: 1px solid #E5E7EB; color: #9CA3AF; background: #F8F7FF; }
+.module-header .badge.complete { border-color: rgba(124, 58, 237, 0.3); color: #7C3AED; background: #EDE9FE; }
+.module-header .arrow { font-size: 14px; color: #9CA3AF; transition: transform 0.25s ease; }
+.module.open .arrow { transform: rotate(180deg); }
+
+.m1 .module-header { border-left: 4px solid #7C3AED; }
+.m1 .num { background: #EDE9FE; color: #7C3AED; }
+.m2 .module-header { border-left: 4px solid #84CC16; }
+.m2 .num { background: #ECFCCB; color: #4D7C0F; }
+.m3 .module-header { border-left: 4px solid #5B21B6; }
+.m3 .num { background: #EDE9FE; color: #5B21B6; }
+.m4 .module-header { border-left: 4px solid; border-image: linear-gradient(180deg, #7C3AED, #84CC16) 1; }
+.m4 .num { background: linear-gradient(135deg, #EDE9FE, #ECFCCB); color: #5B21B6; }
+
+.module-body { display: none; padding: 0 18px 16px; }
+.module.open .module-body { display: block; }
+
+.step { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid #F3F4F6; }
+.step:last-child { border-bottom: none; }
+.step-check { width: 22px; height: 22px; border: 2px solid #D1D5DB; border-radius: 6px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); margin-top: 1px; }
+.step-check:hover { border-color: #7C3AED; background: #EDE9FE; }
+.step-check.done { background: #7C3AED; border-color: #7C3AED; box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3); }
+.step-check.done::after { content: '\2713'; color: #fff; font-weight: 700; font-size: 13px; }
+.step.completed .step-text { color: #9CA3AF; text-decoration: line-through; }
+.step.completed .step-text b { color: #9CA3AF; }
+
+.step-content { flex: 1; min-width: 0; }
+.step-text { font-size: 14px; line-height: 1.6; }
+.step-text b { color: #1A1A2E; font-weight: 600; }
+.step-time { display: inline-block; background: #EDE9FE; padding: 2px 8px; border-radius: 100px; font-size: 11px; color: #7C3AED; margin-left: 6px; font-weight: 600; }
+.step-note { font-size: 13px; color: #6B7280; margin-top: 6px; line-height: 1.5; }
+.step-note a { color: #7C3AED; text-decoration: underline; text-decoration-color: rgba(124, 58, 237, 0.3); text-underline-offset: 2px; }
+.step-note a:hover { text-decoration-color: #7C3AED; }
+.step-note code { background: #F8F7FF; padding: 1px 5px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5B21B6; }
+
+.cmd-block { margin-top: 10px; background: #1A1730; border-radius: 12px; overflow: hidden; border: 1px solid rgba(124, 58, 237, 0.15); }
+.cmd-label { display: flex; align-items: center; justify-content: space-between; padding: 6px 12px; background: #0F0D1A; font-size: 11px; color: #9CA3AF; font-weight: 500; }
+.cmd-label .platform { display: flex; align-items: center; gap: 6px; }
+.cmd-label .platform-icon { font-size: 13px; }
+.cmd-copy { background: transparent; border: 1px solid rgba(124, 58, 237, 0.3); color: #9CA3AF; padding: 2px 10px; border-radius: 6px; cursor: pointer; font-size: 11px; font-family: inherit; transition: all 0.2s; }
+.cmd-copy:hover { border-color: #7C3AED; color: #7C3AED; background: rgba(124, 58, 237, 0.1); }
+.cmd-copy.copied { border-color: #84CC16; color: #84CC16; }
+.cmd-code { padding: 10px 12px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #E8E8E8; overflow-x: auto; white-space: pre-wrap; word-break: break-all; line-height: 1.5; }
+
+.break-block { margin: 16px 20px; padding: 24px; background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.break-block .emoji { font-size: 28px; }
+.break-block .text { margin-top: 8px; font-size: 15px; font-weight: 700; color: #7C3AED; }
+.break-block .sub { font-size: 13px; color: #9CA3AF; margin-top: 4px; }
+
+.tip { background: #ECFCCB; border-left: 3px solid #84CC16; padding: 10px 14px; border-radius: 0 12px 12px 0; margin-top: 10px; font-size: 13px; color: #3F6212; line-height: 1.5; }
+.tip::before { content: 'Совет '; font-weight: 600; }
+
+.warning { background: #FEF2F2; border-left: 3px solid #EF4444; padding: 10px 14px; border-radius: 0 12px 12px 0; margin-top: 10px; font-size: 13px; color: #991B1B; line-height: 1.5; }
+.warning::before { content: 'Важно '; font-weight: 600; }
+
+.say { background: #EDE9FE; border-left: 3px solid #7C3AED; padding: 10px 14px; border-radius: 0 12px 12px 0; margin-top: 10px; font-size: 13px; color: #5B21B6; line-height: 1.5; font-style: italic; }
+.say::before { content: 'Сказать: '; font-weight: 600; font-style: normal; }
+
+.footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid #E5E7EB; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 100; }
+.footer .stats { font-size: 12px; color: #9CA3AF; }
+.footer .reset-btn { background: none; border: 1px solid #D1D5DB; color: #9CA3AF; padding: 5px 14px; border-radius: 8px; cursor: pointer; font-size: 12px; font-family: inherit; transition: all 0.2s; }
+.footer .reset-btn:hover { border-color: #EF4444; color: #EF4444; }
+
+@media (max-width: 600px) {
+  .header h1 { font-size: 16px; }
+  .module { margin: 10px 12px; }
+  .module-body { padding: 0 14px 14px; }
+  .break-block { margin: 10px 12px; }
+  .step-text { font-size: 13px; }
+  .cmd-code { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <div class="header-top">
+      <div>
+        <h1><span>IKIGAI</span> AI-Интенсив по вайб-кодингу</h1>
+        <div class="meta"><b>15 апреля 2026</b> &middot; 10:00–19:00 &middot; Астана</div>
+      </div>
+      <div class="timer" id="timer" onclick="toggleTimer()">00:00:00</div>
+    </div>
+    <div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text">
+        <span class="done" id="progressLabel">0 / 0 шагов</span>
+        <span id="progressPercent">0%</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+
+<!-- MODULE 1 -->
+<div class="module m1 open" data-module="1">
+  <div class="module-header" onclick="toggleModule(this)">
+    <div class="num">1</div>
+    <div class="info">
+      <div class="title">Установка</div>
+      <div class="time">10:00 – 12:00 (2 часа)</div>
+    </div>
+    <div class="badge" id="badge-1">0/13</div>
+    <div class="arrow">&#9660;</div>
+  </div>
+  <div class="module-body">
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Знакомство и правила дня</b> <span class="step-time">15 мин</span></div>
+        <div class="say">Сегодня вы не будете программировать. Вы будете разговаривать с AI, а он будет программировать за вас. Это и есть вайб-кодинг.</div>
+        <div class="step-note">Представиться, цели дня, правила (камеры, вопросы, перерывы). Попросить всех открыть ноутбуки.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Установка Cursor</b> <span class="step-time">20 мин</span></div>
+        <div class="step-note">Скачать с <a href="https://cursor.com" target="_blank">cursor.com</a>. Установить, открыть. Помочь тем, у кого проблемы.</div>
+        <div class="warning">У некоторых антивирус может блокировать установку. Попросить временно отключить.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Обзор Cursor: интерфейс</b> <span class="step-time">15 мин</span></div>
+        <div class="step-note">Показать: файловое дерево, терминал (Ctrl+`), чат (Ctrl+L), Composer (Ctrl+I). Это ваша AI-мастерская.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Создаём рабочую папку и inbox проекта</b> <span class="step-time">15 мин</span></div>
+        <div class="say">Прежде чем AI начнёт работать — ему нужен контекст. Как новому сотруднику нужно дать документы о компании. Сейчас мы создадим рабочую папку и сложим туда всё, что AI должен знать о вашем бизнесе.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #EDE9FE; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что сделать прямо сейчас:</b>
+          <span style="display: block; margin-bottom: 6px;"><b>1.</b> Создайте папку <code>Claude</code> на рабочем столе (или где удобно)</span>
+          <span style="display: block; margin-bottom: 6px;"><b>2.</b> Внутри создайте папку <code>inbox</code> — сюда сложим всё о вашем бизнесе</span>
+          <span style="display: block; margin-bottom: 6px;"><b>3.</b> Напишите в текстовом файле <code>inbox/about-me.txt</code>:</span>
+          <span style="display: block; padding-left: 20px; color: #6B7280; margin-bottom: 4px;">— Кто вы, чем занимаетесь</span>
+          <span style="display: block; padding-left: 20px; color: #6B7280; margin-bottom: 4px;">— Какие проекты / продукты / услуги</span>
+          <span style="display: block; padding-left: 20px; color: #6B7280; margin-bottom: 4px;">— Кто ваша целевая аудитория</span>
+          <span style="display: block; padding-left: 20px; color: #6B7280; margin-bottom: 4px;">— Какие цели на ближайшие 3 месяца</span>
+          <span style="display: block; padding-left: 20px; color: #6B7280;">— Что хотите автоматизировать / улучшить</span>
+          <span style="display: block; margin-top: 6px;"><b>4.</b> Закиньте в <code>inbox</code> любые файлы о проекте: презентации, прайсы, скрипты продаж, тексты для сайта, логотип</span>
+        </div>
+        <div class="tip">Дать 5–7 минут на заполнение. Чем больше контекста — тем умнее будет AI. Даже 10 строк текста о себе уже сильно меняют качество ответов.</div>
+        <div class="step-note" style="margin-top: 8px;">Откройте эту папку <code>Claude</code> в Cursor: File &rarr; Open Folder.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Базовые настройки Cursor</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Тема (Dark+), выбор модели (Claude Sonnet / Opus), включить Composer agent mode.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Первый вайб-кодинг момент: установка Claude Code через Cursor</b> <span class="step-time">20 мин</span></div>
+        <div class="say">Сейчас мы попросим AI установить нам другой AI-инструмент. Это и есть вайб-кодинг — вы говорите что нужно, а машина делает.</div>
+        <div class="step-note">Открыть терминал в Cursor и выполнить команду установки:</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform"><span class="platform-icon">&#9654;</span> Windows (PowerShell)</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">irm https://claude.ai/install.ps1 | iex</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform"><span class="platform-icon">&#63743;</span> macOS / Linux</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">curl -fsSL https://claude.ai/install.sh | bash</div>
+        </div>
+        <div class="warning">Для Windows нужен <a href="https://git-scm.com/downloads/win" target="_blank">Git for Windows</a>. Если нет — установить сначала.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Авторизация Claude Code</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Набрать <code>claude</code> в терминале. Откроется браузер для логина. Нужен Pro/Max/Team аккаунт.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Терминал</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude</div>
+        </div>
+        <div class="warning">Бесплатный план Claude.ai НЕ поддерживает Claude Code. Нужен платный аккаунт ($20/мес минимум).</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Проверка установки</b> <span class="step-time">5 мин</span></div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Терминал</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude --version</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Полная диагностика</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude doctor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Правила проекта — CLAUDE.md</b> <span class="step-time">15 мин</span></div>
+        <div class="say">Прежде чем начать работать — зададим правила. Это как ТЗ для сотрудника. Один раз написали — и Claude всегда им следует. Каждый проект, каждую сессию.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #F5F5F0; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что дают правила:</b>
+          <span style="display: block; margin-bottom: 4px;">Claude отвечает на русском, а не на английском</span>
+          <span style="display: block; margin-bottom: 4px;">Не задаёт 100 уточняющих вопросов — сразу делает</span>
+          <span style="display: block; margin-bottom: 4px;">Создаёт проекты в правильной структуре папок</span>
+          <span style="display: block;">Автоматически ведёт README с описанием</span>
+        </div>
+        <div class="step-note" style="margin-top: 8px;">Создаём файл <code>CLAUDE.md</code> в корне проекта. Скопируйте этот промпт:</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude Code создать CLAUDE.md</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Создай файл CLAUDE.md в корне проекта со следующими правилами:
+
+# Project Guidelines
+
+## Language
+- Always answer in Russian.
+
+## Workflow
+- Don't ask clarifying questions before starting work.
+- Make your best assumptions based on context and proceed immediately.
+- If assumptions are significant, briefly mention them after completing the task.
+
+## Project Structure
+- Each project lives in projects/{project-name}/
+- For each new project create a UNIQUE slug & name (project-name). It will be in the URL — make it URL-friendly and descriptive.
+- Project contains: index.html, JS files, CSS files, JS data files.
+- All const/generated content goes in {project-name}/data/ as .js files (e.g., data/questions.js).
+- Each project has a README.md in Russian with: Title, Description, Features. Update it when adding new features.
+- Each project is unique from scratch. Do not base it on other projects.</div>
+        </div>
+        <div class="warning">Это ключевой момент! Без CLAUDE.md каждый раз придётся повторять одни и те же инструкции. С ним — работа идёт на автопилоте.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>AI разбирает inbox и строит структуру</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Помните, мы сложили файлы о проекте в inbox? Сейчас Claude прочитает всё и сам создаст грамотную структуру папок. Как если бы вы наняли ассистента, который за 2 минуты разложил весь ваш хаос по полочкам.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Прочитай все файлы в папке inbox/. Это информация о моём бизнесе и проектах. На основе этого:
+
+1. Создай структуру папок в projects/ — отдельная папка для каждого проекта или направления
+2. Разложи информацию из inbox по соответствующим папкам
+3. В каждой папке проекта создай README.md на русском с описанием
+4. Создай файл projects/INDEX.md — общий каталог всех проектов с кратким описанием
+5. Запомни контекст обо мне и моих проектах — сохрани ключевую информацию в память</div>
+        </div>
+        <div class="tip">Это вау-момент. Участники увидят как AI за минуту создаёт то, на что обычно уходит полдня. Показать результат в файловом дереве Cursor.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Настройка: не спрашивать разрешение</b> <span class="step-time">5 мин</span></div>
+        <div class="say">По умолчанию Claude спрашивает разрешение на каждое действие. Для учебных проектов это только мешает. Отключаем.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">В Claude Code набрать</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">/config</div>
+        </div>
+        <div class="step-note">Выбрать режим разрешений: <b>auto-accept edits</b> (рекомендуется для обучения) или <b>trusted</b> (полный автопилот).</div>
+        <div class="tip">Для реальных проектов с важными данными лучше оставить подтверждения включёнными. Для обучения — отключаем.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Первый тест-драйв</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Всё настроено! Теперь попробуем. Напишите Claude простую задачу на русском. Заметьте — он сразу делает, не задаёт вопросов. Это потому что мы прописали правила.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Пример задачи</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Создай проект "мой-сайт" — красивую HTML-визитку с моим именем, фото-заглушкой, списком навыков и контактами. Тёмная тема.</div>
+        </div>
+        <div class="tip">Дать 5 минут каждому попробовать. Claude создаст папку, файлы, README — всё по правилам из CLAUDE.md. Показать лучшие результаты на экране.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Статус-лайн с расходом токенов</b> <span class="step-time">5 мин</span></div>
+        <div class="step-note">Показать как видеть расход токенов в реальном времени. Полезно для контроля бюджета.</div>
+        <div class="tip">Объяснить: 1 сессия ~ $0.5–3. Max план = $100/мес безлимит.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODULE 2 -->
+<div class="module m2" data-module="2">
+  <div class="module-header" onclick="toggleModule(this)">
+    <div class="num">2</div>
+    <div class="info">
+      <div class="title">Освоение вайб-кодинга</div>
+      <div class="time">12:00 – 14:00 (2 часа)</div>
+    </div>
+    <div class="badge" id="badge-2">0/8</div>
+    <div class="arrow">&#9660;</div>
+  </div>
+  <div class="module-body">
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Вайб-кодинг: создаём лендинг с нуля</b> <span class="step-time">30 мин</span></div>
+        <div class="say">Сейчас мы создадим полноценную веб-страницу, не написав ни строчки кода руками. Просто разговариваем с Claude.</div>
+        <div class="step-note">Демо: создать папку проекта, описать Claude задачу на русском, показать результат в браузере.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Пример промпта для Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Создай красивый лендинг для кофейни "Утро". Тёмная тема, анимации, секции: герой-баннер, меню, отзывы, контакты. Адаптивный дизайн. Один HTML-файл со встроенными стилями.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Логика: промпт -> план -> код -> результат</b> <span class="step-time">15 мин</span></div>
+        <div class="step-note">Объяснить цикл: вы описываете задачу -> Claude планирует -> пишет код -> вы проверяете -> итерируете.</div>
+        <div class="tip">Показать /plan режим — Claude сначала создаёт план, потом спрашивает одобрение.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Plan Mode — демонстрация</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Включить Plan Mode (Shift+Tab) и показать как Claude создаёт пошаговый план перед кодом.</div>
+        <div class="say">Plan Mode — это как бриф. Claude сначала покажет что он собирается делать, и только после вашего OK начнёт работу.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Практика: каждый делает свой мини-проект</b> <span class="step-time">30 мин</span></div>
+        <div class="step-note">Дать 30 минут на свободную практику. Каждый создаёт что-то своё: лендинг, калькулятор, портфолио, визитку.</div>
+        <div class="tip">Ходить по залу, помогать. Собирать интересные примеры для показа.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Показ лучших работ</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Вывести 3–4 лучших результата на экран. Похвалить, разобрать что сработало.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Git basics через Claude Code</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Показать: git init, git add, git commit — всё через Claude Code, не руками.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Инициализируй git репозиторий и сделай первый коммит с сообщением "первый вайб-кодинг проект"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Итерации и исправление ошибок</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Если что-то не так — не паникуйте. Просто скажите Claude что не нравится. Он исправит. Это и есть итерации.</div>
+        <div class="step-note">Показать пример: "сделай заголовок крупнее", "поменяй цвет на зелёный", "добавь анимацию".</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Q&A по модулю</b> <span class="step-time">5 мин</span></div>
+        <div class="step-note">Ответить на вопросы перед обедом.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BREAK -->
+<div class="break-block">
+  <div class="emoji">&#127829; &#9749;</div>
+  <div class="text">Обеденный перерыв</div>
+  <div class="sub">14:00 – 15:00 | 1 час</div>
+</div>
+
+<!-- MODULE 3 -->
+<div class="module m3" data-module="3">
+  <div class="module-header" onclick="toggleModule(this)">
+    <div class="num">3</div>
+    <div class="info">
+      <div class="title">Rules & Skills</div>
+      <div class="time">15:00 – 17:00 (2 часа)</div>
+    </div>
+    <div class="badge" id="badge-3">0/12</div>
+    <div class="arrow">&#9660;</div>
+  </div>
+  <div class="module-body">
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>CLAUDE.md — правила проекта</b> <span class="step-time">20 мин</span></div>
+        <div class="say">CLAUDE.md — это как должностная инструкция для AI. Вы пишете правила, и Claude Code всегда им следует.</div>
+        <div class="step-note">Показать структуру: язык, безопасность, стиль кода, workflow. Создать вместе с участниками.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Создай файл CLAUDE.md с правилами проекта: отвечай на русском, работай в папке проекта, не удаляй файлы без спроса, используй git для версионирования</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>MEMORY.md — память Claude</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Объяснить: Claude Code может запоминать контекст между сессиями. Показать как это работает.</div>
+        <div class="say">Скажите Claude: "запомни, что я владелец кофейни и мне нужен сайт на русском". Он сохранит это в память.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Установка Superpowers</b> <span class="step-time">20 мин</span></div>
+        <div class="say">Сейчас мы установим самое мощное расширение для Claude Code. Superpowers — это набор навыков, которые превращают Claude из просто чат-бота в дисциплинированного инженера с процессами.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #F5F5F0; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что даёт Superpowers:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>/plan</b> — создаёт пошаговый план перед кодом. Claude не бросается писать, а сначала думает</span>
+          <span style="display: block; margin-bottom: 4px;"><b>/brainstorm</b> — генерирует идеи и варианты решений. Как мозговой штурм с AI-командой</span>
+          <span style="display: block; margin-bottom: 4px;"><b>/tdd</b> — тест-драйв разработка. Сначала тесты, потом код. Профессиональный подход</span>
+          <span style="display: block; margin-bottom: 4px;"><b>/verify</b> — проверяет что всё работает перед финализацией. Не доверяй — проверяй</span>
+          <span style="display: block; margin-bottom: 4px;"><b>/code-review</b> — ревью кода как от старшего разработчика</span>
+          <span style="display: block;"><b>/simplify</b> — убирает лишнее, оптимизирует код</span>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Шаг 1: добавить marketplace</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude plugin add-marketplace superpowers-marketplace --source github --repo obra/superpowers-marketplace</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Шаг 2: установить плагин</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude plugin install superpowers@superpowers-marketplace</div>
+        </div>
+        <div class="tip">После установки перезапустите Claude Code (<code>Ctrl+C</code>, потом <code>claude</code>), чтобы скилы подхватились.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Everything Claude Code — полный фреймворк</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Superpowers — это базовый набор. Everything Claude Code — это следующий уровень. 100+ скилов, агенты-специалисты, хуки, автоматические проверки кода.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #F5F5F0; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что добавляет ECC поверх Superpowers:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>100+ специализированных скилов</b> — frontend, backend, API, SEO, маркетинг, продажи</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Субагенты</b> — Claude запускает параллельных специалистов: security-reviewer, architect, tdd-guide</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Хуки</b> — автопроверки при каждом изменении кода (качество, безопасность, форматирование)</span>
+          <span style="display: block;"><b>Session management</b> — сохранение/восстановление сессий между днями работы</span>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Установка ECC</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude plugin add-marketplace everything-claude-code --source github --repo affaan-m/everything-claude-code && claude plugin install everything-claude-code@everything-claude-code</div>
+        </div>
+        <div class="step-note">GitHub: <a href="https://github.com/affaan-m/everything-claude-code" target="_blank">affaan-m/everything-claude-code</a></div>
+        <div class="tip">Для интенсива хватит Superpowers. ECC — для тех, кто хочет пойти дальше. Покажите разницу, не навязывайте.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Repomix — проект в один файл</b> <span class="step-time">5 мин</span></div>
+        <div class="say">Иногда нужно показать весь проект другому AI или человеку. Repomix упаковывает всё в один текстовый файл — структуру, код, README. Как ZIP, но для AI.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Установка и использование</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">npx repomix</div>
+        </div>
+        <div class="step-note">Результат можно скормить в ChatGPT, Claude.ai или другому AI для анализа проекта целиком. GitHub: <a href="https://github.com/yamadashy/repomix" target="_blank">yamadashy/repomix</a></div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Тестируем /brainstorm</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Давайте сразу попробуем. Спросите Claude: какие фичи добавить на ваш сайт? Он не просто ответит — он проведёт полноценный мозговой штурм.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Набрать в Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">/brainstorm Какие 5 фичей добавить на мой сайт чтобы увеличить конверсию и удержание клиентов?</div>
+        </div>
+        <div class="step-note">Дать каждому попробовать со своим проектом. Claude задаст уточняющие вопросы — это нормально, он разбирается в контексте.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Тестируем /plan</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Теперь попросим Claude не просто придумать — а спланировать. /plan создаёт детальный план с файлами, шагами и зависимостями. Как техзадание, только за 30 секунд.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Набрать в Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">/plan Добавить на сайт форму записи на консультацию с выбором даты, времени и услуги. Данные сохранять в JSON-файл.</div>
+        </div>
+        <div class="step-note">Claude покажет план и спросит одобрение. Не торопитесь нажимать OK — прочитайте план, это важная привычка.</div>
+        <div class="warning">Объяснить: Plan Mode — это защита от того, чтобы AI не делал лишнего. Всегда читайте план перед одобрением.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>CEO Council — AI-совет директоров</b> <span class="step-time">15 мин</span></div>
+        <div class="say">А вот это вообще магия. CEO Council — это скилл, который собирает виртуальный совет директоров. 5 разных экспертов анализируют вашу бизнес-задачу с разных сторон: финансы, маркетинг, операции, риски, рост.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #F5F0F8; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Кто в совете:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>CEO</b> — стратегия и видение, приоритеты бизнеса</span>
+          <span style="display: block; margin-bottom: 4px;"><b>CFO</b> — финансовая модель, unit-экономика, бюджет</span>
+          <span style="display: block; margin-bottom: 4px;"><b>CMO</b> — маркетинг, позиционирование, каналы</span>
+          <span style="display: block; margin-bottom: 4px;"><b>CTO</b> — техническая реализуемость, архитектура</span>
+          <span style="display: block;"><b>Risk Advisor</b> — риски, узкие места, план Б</span>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Протестировать CEO Council</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Проведи CEO Council: я хочу запустить онлайн-курс по AI для предпринимателей. Бюджет 500 000 тенге. Срок подготовки 2 недели. Целевая аудитория — владельцы малого бизнеса в Казахстане.</div>
+        </div>
+        <div class="tip">Дать каждому попробовать со своей реальной бизнес-задачей. Результат впечатляет — сохранить выводы.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Где брать правила и скилы — библиотеки</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note" style="margin-top: 8px; padding: 12px; background: #F5F5F0; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Библиотеки готовых правил и скилов:</b>
+          <span style="display: block; margin-bottom: 6px;"><a href="https://cursor.directory/rules/popular" target="_blank" style="color: #2B4A7C; font-weight: 600;">Cursor Directory</a> — 10 000+ готовых правил для Cursor и Claude Code. Фильтр по языку, фреймворку, задаче. Скопировал — вставил в CLAUDE.md.</span>
+          <span style="display: block; margin-bottom: 6px;"><a href="https://www.skillhub.club/" target="_blank" style="color: #2B4A7C; font-weight: 600;">SkillHub</a> — маркетплейс навыков для Claude Code. Готовые скилы под конкретные задачи.</span>
+          <span style="display: block;"><a href="https://github.com/obra/superpowers" target="_blank" style="color: #2B4A7C; font-weight: 600;">Superpowers GitHub</a> — исходники + документация по всем скилам.</span>
+        </div>
+        <div class="say">Не нужно писать правила с нуля. Зайдите на Cursor Directory, найдите правила для вашей задачи, скопируйте в CLAUDE.md. Это как скачать шаблон резюме — но для AI.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Excalidraw — визуальное проектирование</b> <span class="step-time">15 мин</span></div>
+        <div class="step-note">Показать <a href="https://excalidraw.com" target="_blank">excalidraw.com</a>: нарисовать схему проекта, сделать скриншот, скормить Claude Code как контекст.</div>
+        <div class="say">Нарисуйте на доске как вы видите свой проект. Потом покажите это Claude — он поймёт картинку и превратит в код.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Практика: настраиваем свою среду</b> <span class="step-time">20 мин</span></div>
+        <div class="step-note">Каждый участник пробует /plan или /brainstorm на своём проекте. Ходить по залу, помогать.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODULE 4 -->
+<div class="module m4" data-module="4">
+  <div class="module-header" onclick="toggleModule(this)">
+    <div class="num">4</div>
+    <div class="info">
+      <div class="title">Интеграции + Результаты</div>
+      <div class="time">17:00 – 19:00 (2 часа)</div>
+    </div>
+    <div class="badge" id="badge-4">0/12</div>
+    <div class="arrow">&#9660;</div>
+  </div>
+  <div class="module-body">
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>MCP — что это и зачем</b> <span class="step-time">15 мин</span></div>
+        <div class="say">MCP — Model Context Protocol. Это как USB для AI. Один стандарт подключения — любой сервис. Notion, Telegram, Google, базы данных — всё через один протокол.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #FBF6EF; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Какие MCP покажем сегодня:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>Context7</b> — актуальная документация 12 000+ библиотек прямо в контексте Claude</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Exa</b> — AI-поиск по интернету (семантический, не как Google)</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Figma</b> — код из Claude отправляется в Figma как редактируемый дизайн</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Notion</b> — чтение/создание страниц, баз данных</span>
+          <span style="display: block;"><b>Gmail / Calendar</b> — чтение почты, создание событий</span>
+        </div>
+        <div class="step-note" style="margin-top: 8px;">Полный каталог MCP: <a href="https://github.com/modelcontextprotocol/servers" target="_blank">github.com/modelcontextprotocol/servers</a></div>
+        <div class="tip">Аналогия для аудитории: MCP = приложения на телефоне. Без них телефон просто звонит. С ними — целый мир. Claude Code без MCP просто пишет код. С MCP — управляет бизнесом.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Context7 — актуальная документация</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Claude обучен на данных до определённой даты. Context7 решает эту проблему — подтягивает свежую документацию 12 000 библиотек прямо в контекст.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Подключить Context7</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude mcp add --transport http context7 https://mcp.context7.com/mcp</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Протестировать — спросить Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Используя Context7, покажи как создать Telegram-бота на последней версии node-telegram-bot-api. Только актуальный API.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Exa — AI-поиск по интернету</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Exa — это не Google. Это нейропоиск, заточенный под AI. Находит то, что обычный поиск не видит. Конкурентов, тренды, статьи.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Подключить Exa</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude mcp add --transport http exa https://mcp.exa.ai/mcp</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Протестировать</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Используя Exa, найди 5 лучших примеров лендингов AI-курсов в СНГ. Проанализируй их структуру и дай рекомендации для моего сайта.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Figma MCP — код в дизайн</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Вы создали сайт в Claude Code. Теперь одной командой отправляем его в Figma — не как скриншот, а как редактируемый дизайн со слоями и компонентами.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Подключить Figma</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude mcp add --transport http figma https://mcp.figma.com/mcp</div>
+        </div>
+        <div class="step-note">Двухсторонняя связь: код &rarr; Figma &rarr; редактирование &rarr; обратно в код. Официальная интеграция от Figma + Anthropic.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Notion MCP</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Демо: подключить Notion и показать как Claude читает/создаёт страницы.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Добавить Notion MCP</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">claude mcp add --transport http notion https://mcp.notion.com/mcp</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Протестировать</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Найди все мои страницы в Notion и создай новую страницу "Заметки с AI-интенсива" с сегодняшней датой и разделами: Инсайты, Инструменты, Следующие шаги.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Gmail + Calendar</b> <span class="step-time">5 мин</span></div>
+        <div class="step-note">Быстрое демо на своём аккаунте: Claude читает непрочитанные письма, создаёт событие в календаре.</div>
+        <div class="say">Claude может стать вашим ассистентом — разбирать почту, планировать встречи, писать ответы. Всё из терминала.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Telegram бот за 10 минут</b> <span class="step-time">20 мин</span></div>
+        <div class="say">Финальное впечатление. Создаём работающего Telegram-бота прямо здесь и сейчас. Не за неделю. За 10 минут.</div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Создай Telegram-бота на Node.js который: 1) приветствует пользователя по имени, 2) рассказывает о моей компании, 3) записывает на консультацию (спрашивает имя, телефон, удобное время), 4) сохраняет заявки в JSON-файл. Бот-токен: [TOKEN]</div>
+        </div>
+        <div class="tip">Заранее создать бота через @BotFather и подготовить токен для демо. Показать результат в живом Telegram.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>NotebookLM — подкаст из ваших заметок</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Финальный WOW-момент. Берём всё что вы создали сегодня — CLAUDE.md, проекты, заметки — и за 2 минуты превращаем в аудио-подкаст с двумя ведущими. На русском.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #F5F0F8; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Что умеет NotebookLM:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>Audio Overview</b> — генерирует подкаст из любых документов (2 ведущих обсуждают ваш контент)</span>
+          <span style="display: block; margin-bottom: 4px;"><b>FAQ</b> — автоматические вопросы-ответы по материалу</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Study Guide</b> — учебное пособие из ваших документов</span>
+          <span style="display: block;"><b>Briefing Doc</b> — краткая сводка для руководителя</span>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Установка notebooklm-py</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">pip install "notebooklm-py[browser]" && python -m playwright install chromium</div>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude Code</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Используя notebooklm-py, создай блокнот NotebookLM из моего файла CLAUDE.md и README.md, сгенерируй Audio Overview (подкаст) на русском языке. Сохрани аудио в папку проекта.</div>
+        </div>
+        <div class="step-note">GitHub: <a href="https://github.com/teng-lin/notebooklm-py" target="_blank">teng-lin/notebooklm-py</a>. Требуется Google-аккаунт.</div>
+        <div class="tip">Запустить демо заранее (генерация 2–3 мин). Включить подкаст на колонке — эффект потрясающий.</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Итоговая практика: собираем свою AI-систему</b> <span class="step-time">20 мин</span></div>
+        <div class="step-note">Каждый участник выбирает задачу и реализует с помощью Claude Code + MCP:</div>
+        <div class="step-note" style="margin-top: 8px; padding: 12px; background: #F5F5F0; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Варианты финального проекта:</b>
+          <span style="display: block; margin-bottom: 4px;">CRM-бот в Telegram для записи клиентов</span>
+          <span style="display: block; margin-bottom: 4px;">Лендинг + форма заявки с сохранением данных</span>
+          <span style="display: block; margin-bottom: 4px;">Контент-генератор (промпт &rarr; пост &rarr; картинка)</span>
+          <span style="display: block; margin-bottom: 4px;">Дашборд аналитики с графиками</span>
+          <span style="display: block;">AI-ассистент для ответов на частые вопросы</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Q&A + фидбек</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note">Ответы на вопросы. Собрать обратную связь. Что удивило? Что хотите углубить?</div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Доп. ресурсы + презентация буткемпа</b> <span class="step-time">10 мин</span></div>
+        <div class="step-note" style="margin-top: 8px; padding: 12px; background: #FBF6EF; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 10px; font-size: 14px;">Инструменты и сервисы:</b>
+          <span style="display: block; margin-bottom: 8px; padding: 12px; background: #EFF4FB; border-radius: 8px; border: 1px solid #C4D7F0;">
+            <a href="https://www.notion.so/88-3D-fa679fffe53a8311a1fe819dca40a9b0" target="_blank" style="color: #2B4A7C; font-weight: 600; font-size: 14px; text-decoration: none;">88 полезных сервисов для вайбкодинга &rarr;</a>
+            <span style="display: block; color: #6B7280; font-size: 12px; margin-top: 6px; line-height: 1.6;">
+              <b style="color: #1A1A2E;">Шрифты</b> — Google Fonts, DaFont, FontShare, UIFonts &middot;
+              <b style="color: #1A1A2E;">Фото</b> — Unsplash, Pexels, Pixabay, Burst &middot;
+              <b style="color: #1A1A2E;">PNG</b> — TopPNG, PNGTree, PNGEgg &middot;
+              <b style="color: #1A1A2E;">Цвета</b> — Coolors, ColorHunt, Khroma AI, UIColors &middot;
+              <b style="color: #1A1A2E;">Мокапы</b> — MockupWorld, Unblast, LS Graphics &middot;
+              <b style="color: #1A1A2E;">Иллюстрации</b> — Humaaans, unDraw, Blush, DrawKit &middot;
+              <b style="color: #1A1A2E;">Иконки</b> — Icons8, Feather, Flaticon, SVGL &middot;
+              <b style="color: #1A1A2E;">Вдохновение</b> — Mobbin, Awwwards, Godly, Dribbble &middot;
+              <b style="color: #1A1A2E;">3D</b> — 3Dicons, Shapefest, IconScout 3D &middot;
+              <b style="color: #1A1A2E;">Анимации</b> — Magic Animator, Efecto &middot;
+              <b style="color: #1A1A2E;">AI-конструкторы</b> — Relume, FrameNet, 21st.dev
+            </span>
+          </span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://cursor.directory/rules/popular" target="_blank" style="color: #2B4A7C;">Cursor Directory</a> — 10 000+ готовых правил для AI-кодинга</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://www.skillhub.club/" target="_blank" style="color: #2B4A7C;">SkillHub</a> — маркетплейс навыков для Claude Code</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://code.claude.com/docs/en/setup" target="_blank" style="color: #2B4A7C;">Claude Code Docs</a> — официальная документация</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://context7.com" target="_blank" style="color: #2B4A7C;">Context7</a> — актуальная документация 12 000+ библиотек</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://exa.ai" target="_blank" style="color: #2B4A7C;">Exa</a> — AI-поисковик для исследований</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://excalidraw.com" target="_blank" style="color: #2B4A7C;">Excalidraw</a> — рисуем архитектуру, скармливаем AI</span>
+          <span style="display: block; margin-bottom: 12px;"><a href="https://platform.composio.dev" target="_blank" style="color: #2B4A7C;">Composio</a> — 1000+ интеграций для AI-агентов</span>
+          <b style="display: block; margin-bottom: 10px; font-size: 14px;">Топ GitHub-репозитории для Claude Code:</b>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/affaan-m/everything-claude-code" target="_blank" style="color: #2B4A7C;">Everything Claude Code</a> — 100+ скилов, агенты, хуки, полный фреймворк</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/shanraisshan/claude-code-best-practice" target="_blank" style="color: #2B4A7C;">Claude Code Best Practices</a> — шпаргалка лучших практик</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/obra/superpowers" target="_blank" style="color: #2B4A7C;">Superpowers</a> — фреймворк навыков (установили сегодня)</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/hestreallyhim/awesome-claude-code" target="_blank" style="color: #2B4A7C;">Awesome Claude Code</a> — каталог всего для Claude Code</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/yamadashy/repomix" target="_blank" style="color: #2B4A7C;">Repomix</a> — упаковка проекта в один файл для AI</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" style="color: #2B4A7C;">Awesome Design.md</a> — шаблоны дизайн-систем для AI</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/anthropics/skills" target="_blank" style="color: #2B4A7C;">Anthropics Skills</a> — официальные скилы от Anthropic</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/dair-ai/Prompt-Engineering-Guide" target="_blank" style="color: #2B4A7C;">Prompt Engineering Guide</a> — полный гайд по промптам</span>
+          <span style="display: block; margin-bottom: 4px;"><a href="https://github.com/teng-lin/notebooklm-py" target="_blank" style="color: #2B4A7C;">NotebookLM-py</a> — генерация подкастов из документов</span>
+          <span style="display: block; margin-bottom: 12px;"><a href="https://github.com/VoltAgent/awesome-claude-code-subagents" target="_blank" style="color: #2B4A7C;">Awesome Subagents</a> — каталог субагентов (продвинутый уровень)</span>
+          <b style="display: block; margin-bottom: 10px; font-size: 14px; color: #5B3D7A;">Факультатив — для продвинутых:</b>
+          <span style="display: block; margin-bottom: 6px; padding: 10px; background: #F5F0F8; border-radius: 6px;">
+            <b style="display: block; margin-bottom: 4px;">Data Warehouse за 1 сессию</b>
+            <span style="display: block; color: #6B7280; font-size: 12px;">Supabase + Notion + дашборды. Соединить маркетинг, продажи и личные KPI в одном месте. 7 таблиц, sync-скрипты GetCourse/AmoCRM, Notion Daily KPI с двусторонней связью к личному трекеру. Сквозная аналитика без data-инженера.</span>
+            <span style="display: block; margin-top: 4px; font-size: 12px;"><b>Стек:</b> Supabase (PostgreSQL) + Notion API + n8n cron + Claude Code</span>
+          </span>
+          <span style="display: block; padding: 10px; background: #F5F0F8; border-radius: 6px;">
+            <b style="display: block; margin-bottom: 4px;">3D-визуализация через AI</b>
+            <span style="display: block; color: #6B7280; font-size: 12px;">Интерактивные 3D-сцены прямо в браузере. Claude Code генерирует Three.js код по текстовому описанию: продуктовые витрины, архитектурные визуализации, интерактивные презентации. Без знания 3D-графики.</span>
+            <span style="display: block; margin-top: 4px; font-size: 12px;"><b>Стек:</b> Three.js + Claude Code + HTML/CSS</span>
+          </span>
+        </div>
+        <div class="say">Сегодня вы попробовали 1% возможностей. За 23 дня буткемпа мы строим полноценную AI-систему для бизнеса. Агенты, автоматизации, маркетинг, продажи — всё на AI.</div>
+        <div class="step-note" style="margin-top: 8px;"><b>AI-буткемп:</b> 23 дня | 4–5 ч/день | 880 000 &#8376; | старт по набору группы</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /container -->
+<div class="footer">
+  <div class="stats" id="footerStats">Готово: 0 | Осталось: 0</div>
+  <button class="reset-btn" onclick="resetAll()">Сбросить всё</button>
+</div>
+
+<script>
+const STORAGE_KEY = 'ikigai-intensive-checklist';
+
+function getAllSteps() { return document.querySelectorAll('[data-step]'); }
+
+function save() {
+  const states = [];
+  getAllSteps().forEach(s => states.push(s.classList.contains('completed')));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(states));
+}
+
+function load() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+  try {
+    const states = JSON.parse(raw);
+    getAllSteps().forEach((s, i) => {
+      if (states[i]) {
+        s.classList.add('completed');
+        s.querySelector('.step-check').classList.add('done');
+      }
+    });
+  } catch(e) {}
+}
+
+function updateProgress() {
+  const all = getAllSteps();
+  const done = document.querySelectorAll('[data-step].completed').length;
+  const total = all.length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = done + ' / ' + total + ' шагов';
+  document.getElementById('progressPercent').textContent = pct + '%';
+  document.getElementById('footerStats').textContent = 'Готово: ' + done + ' | Осталось: ' + (total - done);
+
+  // Update module badges
+  document.querySelectorAll('.module').forEach(m => {
+    const mid = m.dataset.module;
+    const mAll = m.querySelectorAll('[data-step]').length;
+    const mDone = m.querySelectorAll('[data-step].completed').length;
+    const badge = document.getElementById('badge-' + mid);
+    if (badge) {
+      badge.textContent = mDone + '/' + mAll;
+      badge.classList.toggle('complete', mDone === mAll && mAll > 0);
+    }
+  });
+}
+
+function toggleStep(el) {
+  const step = el.closest('[data-step]');
+  step.classList.toggle('completed');
+  el.classList.toggle('done');
+  save();
+  updateProgress();
+}
+
+function toggleModule(header) {
+  header.closest('.module').classList.toggle('open');
+}
+
+function copyCmd(btn) {
+  const code = btn.closest('.cmd-block').querySelector('.cmd-code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+function resetAll() {
+  if (!confirm('Сбросить все галочки?')) return;
+  getAllSteps().forEach(s => {
+    s.classList.remove('completed');
+    s.querySelector('.step-check').classList.remove('done');
+  });
+  save();
+  updateProgress();
+}
+
+// Timer
+let timerInterval = null;
+let timerStart = null;
+const timerEl = document.getElementById('timer');
+
+function toggleTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerEl.classList.remove('running');
+    localStorage.removeItem('ikigai-timer-start');
+  } else {
+    timerStart = Date.now();
+    localStorage.setItem('ikigai-timer-start', timerStart);
+    timerEl.classList.add('running');
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+}
+
+function updateTimer() {
+  if (!timerStart) return;
+  const elapsed = Math.floor((Date.now() - timerStart) / 1000);
+  const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+  const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+  timerEl.textContent = h + ':' + m + ':' + s;
+}
+
+// Init
+load();
+updateProgress();
+
+// Restore timer
+const savedStart = localStorage.getItem('ikigai-timer-start');
+if (savedStart) {
+  timerStart = parseInt(savedStart);
+  timerEl.classList.add('running');
+  timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+}
+</script>
+</body>
+</html>
