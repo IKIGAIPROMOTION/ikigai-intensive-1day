@@ -865,6 +865,80 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
     <div class="step" data-step>
       <div class="step-check" onclick="toggleStep(this)"></div>
       <div class="step-content">
+        <div class="step-text"><b>Безопасность: Prompt Injection и защита</b> <span class="step-time">10 мин</span></div>
+        <div class="say">Вы сегодня установили кучу инструментов. Прежде чем пойдёте ставить ещё — давайте поговорим о безопасности. Потому что AI работает быстро, а злоумышленники — ещё быстрее.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #FEF2F2; border-radius: 8px; border: 1px solid rgba(239,68,68,0.2); color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px; color: #991B1B;">Что такое Prompt Injection?</b>
+          <span style="display: block; margin-bottom: 6px;">Это когда злоумышленник внедряет скрытые инструкции в текст, который попадает к вашему AI. Например: вредоносный MCP-сервер, фейковый скилл или подставной файл в проекте могут заставить Claude Code:</span>
+          <span style="display: block; margin-bottom: 3px; padding-left: 12px;">&#x26A0; Отправить ваши API-ключи на чужой сервер</span>
+          <span style="display: block; margin-bottom: 3px; padding-left: 12px;">&#x26A0; Удалить важные файлы</span>
+          <span style="display: block; margin-bottom: 3px; padding-left: 12px;">&#x26A0; Выполнить опасные команды в терминале</span>
+          <span style="display: block; padding-left: 12px;">&#x26A0; Украсть данные ваших клиентов</span>
+        </div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #EDE9FE; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">5 правил безопасности для вайб-кодера:</b>
+          <span style="display: block; margin-bottom: 6px;"><b>1.</b> Не ставьте MCP/плагины из случайных источников. Проверяйте: кто автор, сколько звёзд на GitHub, есть ли описание</span>
+          <span style="display: block; margin-bottom: 6px;"><b>2.</b> API-ключи — только в <code>.env</code> файле, НИКОГДА в коде</span>
+          <span style="display: block; margin-bottom: 6px;"><b>3.</b> <code>.gitignore</code> обязательно должен содержать <code>.env</code> — иначе ваши ключи утекут в GitHub</span>
+          <span style="display: block; margin-bottom: 6px;"><b>4.</b> Не ставьте <code>Trust Mode</code> на чужих/незнакомых проектах — пусть Claude Code спрашивает перед командами</span>
+          <span style="display: block;"><b>5.</b> Читайте что устанавливаете. Если плагин просит доступ к файлам, сети и терминалу одновременно — это подозрительно</span>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Проверка безопасности проекта</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">/security-scan</div>
+        </div>
+        <div class="tip">Совет от специалиста: попросите своего AI-агента взять OWASP Web Top 10 и OWASP Web Security Testing Guide и проверить ваш проект. Это международный стандарт безопасности.</div>
+        <div class="step-note" style="margin-top: 8px;">Реальный кейс — как мы нашли и закрыли 25 уязвимостей за 1 день: <a href="https://www.notion.so/25-34179fffe53a8133966dce52ed0291fb" target="_blank">Статья в дневнике вайб-кодера</a></div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Дневник вайб-кодера — ваша внешняя память</b> <span class="step-time">5 мин</span></div>
+        <div class="say">AI работает быстрее вашего мозга. Через неделю вы не вспомните, что устанавливали, какие команды запускали и что уже есть под капотом. Желание поставить всё и сразу — неизбежно. Дневник — ваша страховка от хаоса.</div>
+        <div class="step-note" style="margin-top: 12px; padding: 12px; background: #EDE9FE; border-radius: 8px; color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 8px; font-size: 14px;">Зачем вести дневник:</b>
+          <span style="display: block; margin-bottom: 4px;"><b>Внешняя системная память мозга</b> — при скоростях AI вы физически не запомните всё</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Видеть свой прогресс</b> — через месяц удивитесь, сколько сделали</span>
+          <span style="display: block; margin-bottom: 4px;"><b>Не терять что под капотом</b> — какие MCP, плагины, скилы установлены</span>
+          <span style="display: block;"><b>Учиться на своих решениях</b> — что сработало, что сломалось, что починили</span>
+        </div>
+        <div class="step-note" style="margin-top: 8px; padding: 12px; background: #F8F7FF; border-radius: 8px;">
+          <b style="display: block; margin-bottom: 6px;">Что фиксировать каждый день:</b>
+          <span style="display: block; margin-bottom: 3px;">&#x2705; Что установил (MCP, плагины, скилы, библиотеки)</span>
+          <span style="display: block; margin-bottom: 3px;">&#x2705; Что сделал (проекты, фичи, автоматизации)</span>
+          <span style="display: block; margin-bottom: 3px;">&#x2705; Что работает, а что нет</span>
+          <span style="display: block;">&#x2705; Инсайты и идеи на будущее</span>
+        </div>
+        <div class="cmd-block">
+          <div class="cmd-label"><div class="platform">Попросить Claude Code создать дневник</div><button class="cmd-copy" onclick="copyCmd(this)">Copy</button></div>
+          <div class="cmd-code">Создай в Notion страницу "Дневник вайб-кодера" с разделами: Статьи, О дневнике. Первая запись — итоги сегодняшнего дня: что установили, что создали, что узнали.</div>
+        </div>
+        <div class="step-note" style="margin-top: 8px;">Пример дневника со-основателя IKIGAI PROMOTION (19 статей за 2 недели): <a href="https://www.notion.so/33279fffe53a81d9a236e1e196877e79" target="_blank">Дневник в Notion</a></div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
+        <div class="step-text"><b>Домашнее задание</b> <span class="step-time">на дом</span></div>
+        <div class="warning">Обязательно выполните до следующего занятия!</div>
+        <div class="step-note" style="margin-top: 12px; padding: 14px; background: #F8F7FF; border-radius: 8px; border: 1px solid rgba(124,58,237,0.15); color: #1A1A2E;">
+          <b style="display: block; margin-bottom: 10px; font-size: 14px;">Чек-лист домашнего задания:</b>
+          <span style="display: block; margin-bottom: 6px;"><b>1.</b> Запустить <code>/security-scan</code> на своём проекте и исправить найденные проблемы</span>
+          <span style="display: block; margin-bottom: 6px;"><b>2.</b> Проверить <code>.gitignore</code> — убедиться, что <code>.env</code> в нём есть</span>
+          <span style="display: block; margin-bottom: 6px;"><b>3.</b> Прочитать статью: <a href="https://www.notion.so/25-34179fffe53a8133966dce52ed0291fb" target="_blank" style="color: #7C3AED;">25 уязвимостей за 1 день</a></span>
+          <span style="display: block; margin-bottom: 6px;"><b>4.</b> Попросить Claude Code: <code>Возьми OWASP Web Top 10 и OWASP Web Security Testing Guide и проверь мой проект на уязвимости</code></span>
+          <span style="display: block; margin-bottom: 6px;"><b>5.</b> Создать дневник вайб-кодера в Notion и записать итоги первого дня</span>
+          <span style="display: block;"><b>6.</b> Попробовать 2–3 новых промпта из тех, что узнали сегодня</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" data-step>
+      <div class="step-check" onclick="toggleStep(this)"></div>
+      <div class="step-content">
         <div class="step-text"><b>Доп. ресурсы + презентация буткемпа</b> <span class="step-time">10 мин</span></div>
         <div class="step-note" style="margin-top: 8px; padding: 12px; background: #FBF6EF; border-radius: 8px; color: #1A1A2E;">
           <b style="display: block; margin-bottom: 10px; font-size: 14px;">Инструменты и сервисы:</b>
