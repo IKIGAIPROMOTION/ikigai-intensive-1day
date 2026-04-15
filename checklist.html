@@ -100,6 +100,41 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
 .footer .reset-btn { background: none; border: 1px solid #D1D5DB; color: #9CA3AF; padding: 5px 14px; border-radius: 8px; cursor: pointer; font-size: 12px; font-family: inherit; transition: all 0.2s; }
 .footer .reset-btn:hover { border-color: #EF4444; color: #EF4444; }
 
+/* === RANK SYSTEM === */
+.rank-bar { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 8px 14px; background: linear-gradient(135deg, #1A1730 0%, #2D1B69 100%); border-radius: 12px; border: 1px solid rgba(124, 58, 237, 0.2); }
+.rank-icon { font-size: 24px; line-height: 1; }
+.rank-info { flex: 1; }
+.rank-title { font-size: 13px; font-weight: 700; color: #E5E7EB; letter-spacing: 0.02em; }
+.rank-subtitle { font-size: 11px; color: #9CA3AF; margin-top: 1px; }
+.rank-next { font-size: 11px; color: rgba(124, 58, 237, 0.8); font-weight: 500; text-align: right; }
+.rank-xp { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+.rank-xp-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.rank-xp-fill { height: 100%; border-radius: 2px; transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); background: linear-gradient(90deg, #7C3AED, #84CC16); }
+.rank-xp-text { font-size: 10px; color: #9CA3AF; font-family: 'JetBrains Mono', monospace; min-width: 36px; text-align: right; }
+
+/* Level Up Toast */
+.levelup-toast { position: fixed; top: -120px; left: 50%; transform: translateX(-50%); z-index: 9999; background: linear-gradient(135deg, #1A1730 0%, #2D1B69 100%); border: 1px solid rgba(124, 58, 237, 0.4); border-radius: 16px; padding: 16px 28px; text-align: center; box-shadow: 0 8px 40px rgba(124, 58, 237, 0.4); transition: top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); pointer-events: none; }
+.levelup-toast.show { top: 20px; }
+.levelup-toast .lu-icon { font-size: 36px; }
+.levelup-toast .lu-title { font-size: 16px; font-weight: 800; color: #FFFFFF; margin-top: 4px; letter-spacing: -0.01em; }
+.levelup-toast .lu-sub { font-size: 12px; color: #C4B5FD; margin-top: 2px; }
+
+/* Confetti */
+.confetti { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9998; overflow: hidden; }
+.confetti-piece { position: absolute; width: 8px; height: 8px; top: -10px; border-radius: 2px; animation: confettiFall 2.5s ease-in forwards; }
+@keyframes confettiFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+/* Final achievement */
+.achievement-banner { display: none; margin: 16px 20px; padding: 24px; background: linear-gradient(135deg, #1A1730, #2D1B69); border: 1px solid rgba(132, 204, 22, 0.3); border-radius: 16px; text-align: center; box-shadow: 0 8px 40px rgba(124, 58, 237, 0.2); }
+.achievement-banner.visible { display: block; animation: fadeUp 0.6s ease; }
+.achievement-banner .ab-icon { font-size: 48px; }
+.achievement-banner .ab-title { font-size: 22px; font-weight: 800; color: #FFFFFF; margin-top: 8px; }
+.achievement-banner .ab-sub { font-size: 14px; color: #C4B5FD; margin-top: 4px; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
 @media (max-width: 600px) {
   .header h1 { font-size: 16px; }
   .module { margin: 10px 12px; }
@@ -126,6 +161,20 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
       <div class="progress-text">
         <span class="done" id="progressLabel">0 / 0 шагов</span>
         <span id="progressPercent">0%</span>
+      </div>
+    </div>
+    <div class="rank-bar" id="rankBar">
+      <div class="rank-icon" id="rankIcon">&#128274;</div>
+      <div class="rank-info">
+        <div class="rank-title" id="rankTitle">Новичок</div>
+        <div class="rank-subtitle" id="rankSubtitle">Начни свой путь</div>
+      </div>
+      <div style="text-align: right;">
+        <div class="rank-next" id="rankNext">Следующий: AI-Стажёр</div>
+        <div class="rank-xp">
+          <div class="rank-xp-bar"><div class="rank-xp-fill" id="rankXpFill" style="width:0%"></div></div>
+          <div class="rank-xp-text" id="rankXpText">0%</div>
+        </div>
       </div>
     </div>
   </div>
@@ -845,6 +894,18 @@ body { font-family: 'Manrope', -apple-system, 'Segoe UI', system-ui, sans-serif;
 </div>
 
 </div><!-- /container -->
+<div class="achievement-banner" id="achievementBanner">
+  <div class="ab-icon" id="abIcon"></div>
+  <div class="ab-title" id="abTitle"></div>
+  <div class="ab-sub" id="abSub"></div>
+</div>
+
+<div class="levelup-toast" id="levelupToast">
+  <div class="lu-icon" id="luIcon"></div>
+  <div class="lu-title" id="luTitle"></div>
+  <div class="lu-sub" id="luSub"></div>
+</div>
+
 <div class="footer">
   <div class="stats" id="footerStats">Готово: 0 | Осталось: 0</div>
   <button class="reset-btn" onclick="resetAll()">Сбросить всё</button>
@@ -885,6 +946,8 @@ function updateProgress() {
   document.getElementById('progressLabel').textContent = done + ' / ' + total + ' шагов';
   document.getElementById('progressPercent').textContent = pct + '%';
   document.getElementById('footerStats').textContent = 'Готово: ' + done + ' | Осталось: ' + (total - done);
+
+  updateRank(done, total);
 
   // Update module badges
   document.querySelectorAll('.module').forEach(m => {
@@ -930,6 +993,96 @@ function resetAll() {
   updateProgress();
 }
 
+// === RANK SYSTEM ===
+const RANKS = [
+  { min: 0,   icon: '\u{1F512}', title: 'Новичок',        sub: 'Начни свой путь',                       msg: '' },
+  { min: 5,   icon: '\u{1F50C}', title: 'Подключён',      sub: 'AI-система активирована',                msg: 'Ты в деле! AI-система запущена' },
+  { min: 15,  icon: '\u{1F331}', title: 'AI-Стажёр',      sub: 'Первые ростки вайб-кодинга',             msg: 'Стажёр? Уже нет! Ты растёшь' },
+  { min: 30,  icon: '\u{26A1}',  title: 'Вайб-кодер',     sub: 'Ты чувствуешь вайб!',                    msg: 'Ты чувствуешь силу вайба!' },
+  { min: 50,  icon: '\u{1F680}', title: 'AI-Падаван',     sub: 'Полпути — ты уже опасен',                msg: 'Полпути пройдено — ты уже опасен!' },
+  { min: 70,  icon: '\u{1F52E}', title: 'AI-Джедай',      sub: 'Сила AI с тобой',                        msg: 'Сила AI с тобой, джедай!' },
+  { min: 85,  icon: '\u{1F451}', title: 'AI-Мастер',      sub: 'Почти легенда',                          msg: 'Мастерство подтверждено!' },
+  { min: 95,  icon: '\u{1F525}', title: 'AI-Сенсей',      sub: 'Ты обучаешь AI, а не наоборот',          msg: 'Сенсей! AI учится у тебя' },
+  { min: 100, icon: '\u{1F3C6}', title: 'Game Changer',   sub: 'Ты изменил игру. Навсегда.',             msg: 'GAME CHANGER! Ты изменил игру!' }
+];
+
+let currentRankIdx = 0;
+
+function getRankIndex(pct) {
+  let idx = 0;
+  for (let i = RANKS.length - 1; i >= 0; i--) {
+    if (pct >= RANKS[i].min) { idx = i; break; }
+  }
+  return idx;
+}
+
+function updateRank(done, total) {
+  const pct = total ? Math.round(done / total * 100) : 0;
+  const newIdx = getRankIndex(pct);
+  const rank = RANKS[newIdx];
+  const nextRank = RANKS[newIdx + 1];
+
+  document.getElementById('rankIcon').textContent = rank.icon;
+  document.getElementById('rankTitle').textContent = rank.title;
+  document.getElementById('rankSubtitle').textContent = rank.sub;
+
+  if (nextRank) {
+    document.getElementById('rankNext').textContent = 'До «' + nextRank.title + '»:';
+    const segStart = rank.min;
+    const segEnd = nextRank.min;
+    const segPct = segEnd > segStart ? Math.min(100, Math.round((pct - segStart) / (segEnd - segStart) * 100)) : 100;
+    document.getElementById('rankXpFill').style.width = segPct + '%';
+    document.getElementById('rankXpText').textContent = segPct + '%';
+  } else {
+    document.getElementById('rankNext').textContent = 'MAX LEVEL';
+    document.getElementById('rankXpFill').style.width = '100%';
+    document.getElementById('rankXpText').textContent = '100%';
+  }
+
+  // Level up detection
+  if (newIdx > currentRankIdx && currentRankIdx > 0 || (newIdx > currentRankIdx && done > 0)) {
+    showLevelUp(rank);
+    if (newIdx === RANKS.length - 1) showAchievement(rank);
+  }
+  currentRankIdx = newIdx;
+}
+
+function showLevelUp(rank) {
+  const toast = document.getElementById('levelupToast');
+  document.getElementById('luIcon').textContent = rank.icon;
+  document.getElementById('luTitle').textContent = rank.title;
+  document.getElementById('luSub').textContent = rank.msg;
+  toast.classList.add('show');
+  spawnConfetti();
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+function showAchievement(rank) {
+  document.getElementById('abIcon').textContent = '\u{1F3C6}';
+  document.getElementById('abTitle').textContent = 'GAME CHANGER';
+  document.getElementById('abSub').textContent = 'Все 216 шагов пройдены. Ты построил свою AI-систему за 1 день.';
+  document.getElementById('achievementBanner').classList.add('visible');
+}
+
+function spawnConfetti() {
+  const container = document.createElement('div');
+  container.className = 'confetti';
+  document.body.appendChild(container);
+  const colors = ['#7C3AED', '#84CC16', '#EDE9FE', '#ECFCCB', '#F59E0B', '#EF4444', '#3B82F6'];
+  for (let i = 0; i < 60; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = Math.random() * 100 + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.animationDelay = Math.random() * 1.5 + 's';
+    piece.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+    piece.style.width = (6 + Math.random() * 6) + 'px';
+    piece.style.height = (6 + Math.random() * 6) + 'px';
+    container.appendChild(piece);
+  }
+  setTimeout(() => container.remove(), 4000);
+}
+
 // Timer
 let timerInterval = null;
 let timerStart = null;
@@ -960,6 +1113,11 @@ function updateTimer() {
 
 // Init
 load();
+// Set initial rank without animation
+const initSteps = getAllSteps();
+const initDone = document.querySelectorAll('[data-step].completed').length;
+const initPct = initSteps.length ? Math.round(initDone / initSteps.length * 100) : 0;
+currentRankIdx = getRankIndex(initPct);
 updateProgress();
 
 // Restore timer
